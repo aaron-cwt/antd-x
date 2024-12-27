@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste image</code>
+<code src="./demo/focus.tsx">Focus</code>
 
 ## API
 
@@ -49,7 +50,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
-| onChange | Callback when input value changes | (value: string) => void | - | - |
+| onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 
 ```typescript | pure
@@ -60,6 +61,14 @@ type SpeechConfig = {
   onRecordingChange?: (recording: boolean) => void;
 };
 ```
+
+### Sender Ref
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| nativeElement | Outer container | `HTMLDivElement` | - | - |
+| focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | Remove focus | () => void | - | - |
 
 ### Sender.Header
 

@@ -6,7 +6,9 @@
 
 Craft AI-driven interfaces effortlessly.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
+
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url]
 
 [Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
 
@@ -22,6 +24,8 @@ Craft AI-driven interfaces effortlessly.
 [bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
+[antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
+[antd-url]: https://ant.design
 
 </div>
 
@@ -83,10 +87,10 @@ const messages = [
 ];
 
 const App = () => (
-  <div>
+  <>
     <Bubble.List items={messages} />
     <Sender />
-  </div>
+  </>
 );
 
 export default App;
@@ -138,11 +142,8 @@ const Component: React.FC = () => {
             },
             onUpdate: (chunk) => {
               console.log('sse object', chunk);
-
               const data = JSON.parse(chunk.data);
-
               content += data?.choices[0].delta.content;
-
               onUpdate(content);
             },
           },
@@ -153,7 +154,7 @@ const Component: React.FC = () => {
     },
   });
 
-  function onRequest(message: string) {
+  const onSubmit = (message: string) => {
     agent.request(
       { message },
       {
@@ -162,9 +163,9 @@ const Component: React.FC = () => {
         onError: () => {},
       },
     );
-  }
+  };
 
-  return <Sender onSubmit={onRequest} />;
+  return <Sender onSubmit={onSubmit} />;
 };
 ```
 
@@ -210,7 +211,6 @@ const Demo: React.FC = () => {
 
         for await (const chunk of stream) {
           content += chunk.choices[0]?.delta?.content || '';
-
           onUpdate(content);
         }
 
@@ -236,10 +236,10 @@ const Demo: React.FC = () => {
   }));
 
   return (
-    <div>
+    <>
       <Bubble.List items={items} />
       <Sender onSubmit={onRequest} />
-    </div>
+    </>
   );
 };
 
